@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Marathon</title>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.input-group {
+				margin: 10px 0px;
+			}
+			
+			h3 {
+				padding: 5px;
+				border-bottom: 1px solid #ddd;
+			}
+			
+			li {
+				list-style-type: square;
+				margin: 10px 0;
+				list-style: none;
+			}
+			
+			em {
+				color: #c7254e;
+				font-style: inherit;
+				background-color: #f9f2f4;
+			}
+			
+			body {
+				background-image: url(img/rob-jelinski-studios-148452.jpg);
+				background-size: cover;
+			}
+			
+			footer{
+				
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			
+			<div class="row " style="margin-top: 10%;margin-left: 2%;">
+				<div class="col-md-offset-4">
+                    <div class="col-md-6">
+						<div class="well col-md-12" style="background-color: white;box-shadow: 0px 0px 40px #CBCBCB;">
+							<div class="text-center"><strong><h1 style="font: '黑体'; font-weight: 600;color: #337ab7;">Marathon</br></h1></strong></div>
+							<h3 class="text-center">用户登录</h3>
+							<div class="input-group input-group-md">
+								<span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+								<input type="text" id = "username" class="form-control" placeholder="用户名" aria-describedby="sizing-addon1">
+							</div>
+							<div class="input-group input-group-md">
+								<span class="input-group-addon" id="sizing-addon2"><i class="glyphicon glyphicon-lock"></i></span>
+								<input type="password" id = "password" class="form-control" placeholder="密码" aria-describedby="sizing-addon1">
+							</div>
+
+							<a a href="/danmu/en/index_en.html" target="_self">En</a>
+							<a href="forget.html" style="float: right">找回密码</a>
+
+							<button type="submit" class="btn btn-success btn-block" style="margin-top: 0.5em;" onclick="login();">登录</button>
+							<center>
+                    			<a href="signin.html" class="btn btn-warning btn-block" style="margin-top: 0.5em;">注册</a>
+                    		</center>
+                        </div>
+							
+						<div class="col-md-12">
+						<footer align = "center" style="margin-top: 8em; color:white;"><div >© SUSTC Marathon All Rights Reserved</br></div></footer>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				function login(){
+					var userName = $("#username").val();
+					var passWord = $("#password").val();
+					var legal=false;
+					$("#login").attr("disabled","disabled");
+					$("#login").text("Logining...");
+					$.ajax({
+						type:"post",
+						url:"/user/login.do",
+						async:true,
+						data:{username:userName,password:passWord},
+						success:function(data){
+							if(data.status==0 ) window.location.href = "https://www.baidu.com/";
+							if(data.status!=0) alert(data.msg);
+							$("#login").removeAttr("disabled");
+							$("#login").text("Login");
+						},
+						error:function(){
+							alert("Login error!");
+							$("#login").removeAttr("disabled");
+							$("#login").text("Login");
+						}
+					});
+				}
+			</script>
+	</body>
+
+</html>

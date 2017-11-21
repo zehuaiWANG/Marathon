@@ -1,0 +1,58 @@
+[
+	{
+		"number": "DS20170706001",
+		"buyer": "deckers",
+		"stype": "生产中验货",
+		"date":  "2017/5/26",
+		"location": "china shenzhen",
+		"PO": "defrfg",
+		"KH": "fewfwe",
+		"status": "reserved"
+	},
+
+	{
+		"number": "DS20170706001",
+		"buyer": "deckers",
+		"stype": "生产中验货",
+		"date":  "2017/5/26",
+		"location": "china shenzhen",
+		"PO": "defrfg",
+		"KH": "fewfwe",
+		"status": "reserved"
+
+	},
+
+	{
+		"number": "DS20170706001",
+		"buyer": "deckers",
+		"stype": "生产中验货",
+		"date":  "2017/5/26",
+		"location": "china shenzhen",
+		"PO": "defrfg",
+		"KH": "fewfwe",
+		"status": "reserved"
+
+	},
+	{
+		"number": "DS20170706009",
+		"buyer": "deckers",
+		"stype": "生产中验货",
+		"date":  "2017/5/26",
+		"location": "china shenzhen",
+		"PO": "defrfg",
+		"KH": "fewfwe",
+		"status": "reserved"
+
+	},
+	{
+		"number": "DS20170706009",
+		"buyer": "deckers",
+		"stype": "生产中验货",
+		"date":  "2017/5/26",
+		"location": "china shenzhen",
+		"PO": "defrfg",
+		"KH": "fewfwe",
+		"status": "reserved"
+
+	}
+]

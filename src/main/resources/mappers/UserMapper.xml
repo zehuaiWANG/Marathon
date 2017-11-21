@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mls.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.mls.pojo.User" >
+    <constructor >
+      <idArg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="forgetQues" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="forgetAns" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    username, password, forgetQues, forgetAns
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where username = #{username,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mls.pojo.User" >
+    insert into user (username, password, forgetQues, 
+      forgetAns)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{forgetques,jdbcType=VARCHAR}, 
+      #{forgetans,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mls.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="forgetques != null" >
+        forgetQues,
+      </if>
+      <if test="forgetans != null" >
+        forgetAns,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="forgetques != null" >
+        #{forgetques,jdbcType=VARCHAR},
+      </if>
+      <if test="forgetans != null" >
+        #{forgetans,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mls.pojo.User" >
+    update user
+    <set >
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="forgetques != null" >
+        forgetQues = #{forgetques,jdbcType=VARCHAR},
+      </if>
+      <if test="forgetans != null" >
+        forgetAns = #{forgetans,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mls.pojo.User" >
+    update user
+    set password = #{password,jdbcType=VARCHAR},
+      forgetQues = #{forgetques,jdbcType=VARCHAR},
+      forgetAns = #{forgetans,jdbcType=VARCHAR}
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <select id="login"  resultType="int">
+    SELECT count(1) FROM user
+    where username = #{username,jdbcType=VARCHAR}
+    and  password = #{password,jdbcType=VARCHAR}
+  </select>
+  <select id="getComfirm" resultType="int">
+    SELECT count(1) FROM user
+    WHERE  username = #{username,jdbcType=VARCHAR}
+    AND forgetQues = #{forgetQues,jdbcType=VARCHAR}
+    AND forgetAns = #{forgetAns,jdbcType=VARCHAR}
+  </select>
+</mapper>

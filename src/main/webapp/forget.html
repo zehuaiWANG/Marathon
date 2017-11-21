@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Marathon</title>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.input-group {
+				margin: 10px 0px; //输入框上下外边距为10px,左右为0px
+			}
+			
+			h3 {
+				padding: 5px;
+				border-bottom: 1px solid #ddd; //h3字体下边框
+			}
+			
+			li {
+				list-style-type: square; //列表项图标为小正方形
+				margin: 10px 0; //上下外边距是10px
+				list-style: none;
+			}
+			
+			em {
+				//强调的样式
+				color: #c7254e;
+				font-style: inherit;
+				background-color: #f9f2f4;
+			}
+			
+			body {
+				background-image: url(img/rob-jelinski-studios-148452.jpg);
+				background-size: cover;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row " style="margin-top: 10%;margin-left: 2%;">
+				<div class="col-md-offset-4">
+
+					<div class="col-md-6">
+						<div class="well col-md-10">
+							<h3 class="text-center">找回密码</h3>
+							<div class="input-group input-group-md">
+								<span class="input-group-addon" id="sizing-addon1">用户名</span>
+								<input id="username" type="text" class="form-control" placeholder="用户名" aria-describedby="sizing-addon1">
+							</div>
+							<div class="input-group input-group-md">
+								<span class="input-group-addon" id="sizing-addon2">提示问题</span>
+								<input id="forgetques" type="text" class="form-control" placeholder="提示问题" aria-describedby="sizing-addon1">
+							</div>
+							<div class="input-group input-group-md">
+								<span class="input-group-addon" id="sizing-addon3">提示答案</span>
+								<input id="forgetans" type="text" class="form-control" placeholder="提示答案" aria-describedby="sizing-addon1">
+							</div>
+							<div class="input-group input-group-md">
+								<span class="input-group-addon" id="sizing-addon4">新密码</span>
+								<input id="newpassword" type="text" class="form-control" placeholder="新密码" aria-describedby="sizing-addon1">
+							</div>
+							<button type="submit" class="btn btn-primary btn-block" style="margin-top: 0.5em;" onclick="register();">确认修改</button>
+						</div>
+						<div class="col-md-12">
+							<footer align = "center" style="margin-top: 8em; color:white;"><div >© SUSTC Marathon All Rights Reserved</br></div></footer>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function register(){
+				var username = $("#username").val();
+				var forgetques = $("#forgetques").val();
+				var forgetans = $("#forgetans").val();
+				var newpassword = $("#newpassword").val();
+				var legal=false;
+				$.ajax({
+					type:"post",
+					url:"/user/getPassword.do",
+					async:true,
+					data:{
+						forgetQues:forgetques,
+						forgetAns:forgetans,
+						username:username,
+						newPassword:newpassword
+					},
+					success:function(data){
+						alert(data.msg);
+						if(data.status == 0 ){
+							window.location.href = "login.html";
+						} 	
+					},
+					error:function(){
+						alert("ReSet Password error!");
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

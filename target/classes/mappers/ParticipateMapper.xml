@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mls.dao.ParticipateMapper" >
+  <resultMap id="BaseResultMap" type="com.mls.pojo.Participate" >
+    <constructor >
+      <idArg column="username" jdbcType="VARBINARY" javaType="byte[]" />
+      <arg column="eventid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="coordinate" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    username, eventid, coordinate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="byte[]" >
+    select 
+    <include refid="Base_Column_List" />
+    from participate
+    where username = #{username,jdbcType=VARBINARY}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="byte[]" >
+    delete from participate
+    where username = #{username,jdbcType=VARBINARY}
+  </delete>
+  <insert id="insert" parameterType="com.mls.pojo.Participate" >
+    insert into participate (username, eventid, coordinate
+      )
+    values (#{username,jdbcType=VARBINARY}, #{eventid,jdbcType=INTEGER}, #{coordinate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mls.pojo.Participate" >
+    insert into participate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="eventid != null" >
+        eventid,
+      </if>
+      <if test="coordinate != null" >
+        coordinate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARBINARY},
+      </if>
+      <if test="eventid != null" >
+        #{eventid,jdbcType=INTEGER},
+      </if>
+      <if test="coordinate != null" >
+        #{coordinate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mls.pojo.Participate" >
+    update participate
+    <set >
+      <if test="eventid != null" >
+        eventid = #{eventid,jdbcType=INTEGER},
+      </if>
+      <if test="coordinate != null" >
+        coordinate = #{coordinate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where username = #{username,jdbcType=VARBINARY}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mls.pojo.Participate" >
+    update participate
+    set eventid = #{eventid,jdbcType=INTEGER},
+      coordinate = #{coordinate,jdbcType=VARCHAR}
+    where username = #{username,jdbcType=VARBINARY}
+  </update>
+</mapper>
